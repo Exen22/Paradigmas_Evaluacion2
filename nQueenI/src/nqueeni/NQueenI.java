@@ -4,23 +4,55 @@ package nqueeni;
 
 import java.util.Scanner;
 import java.util.Stack;
-//import java.util.ArrayList;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 //import java.util.Arrays;
 
 class Resolve{
-    Stack<Integer> pila = new Stack<>();
-    //private int[]queens;
-    private final int nQueens;
+    Stack<Integer> pila;
+    ArrayList<Stack<Integer>> arStack;
     
-    public Resolve(int nQueens)
+    //private int[]queens;
+    private int nQueens;
+    
+    public Resolve()
     {
+        pila = new Stack<>();
+        arStack = new ArrayList<>();
+    }
+
+    public int getnQueens() {
+        return nQueens;
+    }
+
+    public void setnQueens(int nQueens) {
         this.nQueens = nQueens;
     }
     
+    
     //mostrar resultado
-    private void showS(Stack<Integer> stack)
+    public void showS()
     {
-        System.out.println();
+        int option;
+        String juan = new String();
+        Scanner keyboard = new Scanner(System.in);
+        JOptionPane.showMessageDialog(null," Soluciones disponibles: " + arStack.size());
+        //System.out.print("\n Soluciones disponibles: " + arStack.size());
+        
+        do{
+            option = Integer.parseInt(JOptionPane.showInputDialog(null, " Ingrese la solucion que desea ver: "));
+            
+            if(option < 1 || option > arStack.size())
+                JOptionPane.showMessageDialog(null," No existe esa solucion. intente otra");
+            
+        }while(option < 1 || option > arStack.size());
+        
+        Stack<Integer> pilaS = arStack.get(option-1);
+        
+        System.out.println(pilaS.isEmpty());
+        
+        
+      
         
         for(int row = 0; row < nQueens; row++ )
         {
@@ -28,12 +60,16 @@ class Resolve{
             {
                 //puesto que al pila almacena la columna si cada fila (row) contendra
                 //el indice la columna
-                if (stack.get(row) == col)
-                    System.out.print(" Q ");
-                else System.out.print(" - ");
+                if (pilaS.get(row) == col)
+                    juan+=" Q ";
+                    //System.out.print(" Q ");
+                else juan+= " -- "; //System.out.print(" - ");
             }
-            System.out.println();
+            //System.out.println();
+            juan+="\n";
         }
+        
+        JOptionPane.showMessageDialog(null,juan);
     }
     
     private boolean check(int row, int col)
@@ -58,9 +94,10 @@ class Resolve{
     {
         int col = 0;
         
+        
         //bucle que se repite hasta que lo terminemos 
         while(true)
-        {    
+        {
             //comparamos cada columna mientras que la columna no supere el numero de reinas
             while(col < nQueens)
             {
@@ -81,10 +118,24 @@ class Resolve{
             
             if (pila.size() == nQueens)
             {
-                showS(pila);
-                //col = pila.pop() + 1;
+                //showS(pila);
+                
+                //instacio una nueva pila donde guardare los indice 
+                Stack<Integer> solutionStack = new Stack<>();
+                 
+                //guardamos los indices en la pila
+                pila.forEach((queenCol) -> {
+                    solutionStack.push(queenCol);
+                });
+                
+                //guardamos la pila en la lista
+                arStack.add(solutionStack);
+                
+                //iteramos para seguir buscando soluciones
+                col = pila.pop() + 1;
+
                 //en caso de querer mostrar una sola solucion quite el siguiente comentario
-                break;
+                //break;
             }
             
         }
@@ -96,9 +147,13 @@ public class NQueenI {
    
     public static void main(String[] args) {
         Scanner keyboard = new Scanner(System.in);
-        System.out.print("\n Ingrese el numero de reinas: ");
-        int nQ = keyboard.nextInt();
-        Resolve reSolution = new Resolve(nQ);
+        //System.out.print("\n Ingrese el numero de reinas: ");
+        
+        
+        Resolve reSolution = new Resolve();
+        int nQ = Integer.parseInt(JOptionPane.showInputDialog(null, " Ingrese el numero de reinas: "));
+        reSolution.setnQueens(nQ);
+
         
         if (nQ <= 3)
         {
@@ -106,7 +161,10 @@ public class NQueenI {
             System.out.println("No hay soluciones posibles o el tablero es invalido");
             System.exit(0);
             
-        } else reSolution.solution();
+        } else {
+            reSolution.solution();
+            reSolution.showS();
+        }
         
     }   
 }
