@@ -34,42 +34,42 @@ class Resolve{
     public void showS()
     {
         int option;
-        String juan = new String();
+        String juan;
         Scanner keyboard = new Scanner(System.in);
         JOptionPane.showMessageDialog(null," Soluciones disponibles: " + arStack.size());
         //System.out.print("\n Soluciones disponibles: " + arStack.size());
-        
         do{
-            option = Integer.parseInt(JOptionPane.showInputDialog(null, " Ingrese la solucion que desea ver: "));
+            juan = "";
+            do{
+                option = Integer.parseInt(JOptionPane.showInputDialog(null, " Ingrese la solucion que desea ver: "));
             
-            if(option < 1 || option > arStack.size())
-                JOptionPane.showMessageDialog(null," No existe esa solucion. intente otra");
+                if(option < 1 || option > arStack.size())
+                    JOptionPane.showMessageDialog(null," No existe esa solucion. intente otra");
             
-        }while(option < 1 || option > arStack.size());
+            }while(option < 1 || option > arStack.size());
         
-        Stack<Integer> pilaS = arStack.get(option-1);
+            Stack<Integer> pilaS = arStack.get(option-1);
         
-        System.out.println(pilaS.isEmpty());
-        
-        
-      
-        
-        for(int row = 0; row < nQueens; row++ )
-        {
-            for (int col = 0; col < nQueens;col++)
+            System.out.println(pilaS.isEmpty());
+
+            for(int row = 0; row < nQueens; row++ )
             {
-                //puesto que al pila almacena la columna si cada fila (row) contendra
-                //el indice la columna
-                if (pilaS.get(row) == col)
-                    juan+=" Q ";
-                    //System.out.print(" Q ");
-                else juan+= " -- "; //System.out.print(" - ");
+                for (int col = 0; col < nQueens;col++)
+                {
+                    //puesto que al pila almacena la columna si cada fila (row) contendra
+                    //el indice la columna
+                    if (pilaS.get(row) == col)
+                        juan+=" Q ";
+                        //System.out.print(" Q ");
+                    else juan+= " -- "; //System.out.print(" - ");
+                }
+                //System.out.println();
+                juan+="\n";
             }
-            //System.out.println();
-            juan+="\n";
-        }
         
-        JOptionPane.showMessageDialog(null,juan);
+            JOptionPane.showMessageDialog(null,juan);
+        }while(0 == JOptionPane.showConfirmDialog(null, "¿Quiere ver otra opcion?", "NQueens Problem", JOptionPane.YES_NO_OPTION));
+        
     }
     
     private boolean check(int row, int col)
@@ -152,19 +152,19 @@ public class NQueenI {
         
         Resolve reSolution = new Resolve();
         int nQ = Integer.parseInt(JOptionPane.showInputDialog(null, " Ingrese el numero de reinas: "));
-        reSolution.setnQueens(nQ);
+        
 
         
-        if (nQ <= 3)
+        while (nQ <= 3)
         {
-            
-            System.out.println("No hay soluciones posibles o el tablero es invalido");
-            System.exit(0);
-            
-        } else {
-            reSolution.solution();
-            reSolution.showS();
-        }
+            JOptionPane.showMessageDialog(null, "No hay soluciones posibles o el tablero es invalido. Intente de nuevo");      
+            nQ = Integer.parseInt(JOptionPane.showInputDialog(null, " Ingrese el numero de reinas: "));    
+        } 
+        
+        reSolution.setnQueens(nQ);
+        reSolution.solution();
+        reSolution.showS();
+  
         
     }   
 }
