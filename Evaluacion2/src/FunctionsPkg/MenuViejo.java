@@ -8,8 +8,8 @@ package FunctionsPkg;
 import java.util.Scanner;
 
 
-public class Menu1{
-    
+public class MenuViejo{
+    /* //////////////////////////////////////////////////////////////////////////////////////////77
     public static boolean login(String user, String password)
     {   
         if (user.equals("Admin") && password.equals("1234"))
@@ -27,7 +27,7 @@ public class Menu1{
     public static void main(String[] args){
         Scanner keyboard = new Scanner(System.in);
         ValidF _validF = new ValidF();//objeto de la clase para validar flotantes
-        MenuPila menupila = new MenuPila();//objeto para entrar al menu de pila
+       // MenuPila menupila = new MenuPila();//objeto para entrar al menu de pila
         String user,password;
         int attempts = 0,option;
         boolean band;
@@ -162,7 +162,7 @@ public class Menu1{
                         break;
                     case 6:
                         clear(20);
-                        menupila.mainPila();
+//                        menupila.mainPila();
                         break;
                     default:
                         band = true;
@@ -189,5 +189,5 @@ public class Menu1{
             
         }while(option == 0);    
     }
-    
+    ////////////////////////////////////////////////////////////////////////////////////////////////////// */
 }
