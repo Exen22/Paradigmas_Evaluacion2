@@ -1,4 +1,6 @@
-package FunctionsPkg;
+package OldFunctions_SoloParaRevisarElCodigoViejo;
+
+import FunctionsPkg.ValidF;
 
 public class Primos {
     

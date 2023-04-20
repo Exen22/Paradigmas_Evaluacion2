@@ -1,4 +1,4 @@
-package FunctionsPkg;
+package OldFunctions_SoloParaRevisarElCodigoViejo;
 
 public class Factorial {
     private long num;
