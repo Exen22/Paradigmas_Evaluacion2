@@ -9,15 +9,15 @@ import javax.swing.JOptionPane;
 //import java.util.Arrays;
 
 class Resolve{
-    Stack<Integer> pila;
-    ArrayList<Stack<Integer>> arStack;
+    Pila<Integer> pila;
+    ArrayList<Pila<Integer>> arStack;
     
     //private int[]queens;
     private int nQueens;
     
     public Resolve()
     {
-        pila = new Stack<>();
+        pila = new Pila<>();
         arStack = new ArrayList<>();
     }
 
@@ -31,26 +31,46 @@ class Resolve{
     
     
     //mostrar resultado
-    public void showS()
+    public void showS(/*Pila<Integer> pilaS*/)
     {
         int option;
-        String juan;
-        Scanner keyboard = new Scanner(System.in);
+        String show,confirm;
+        
         JOptionPane.showMessageDialog(null," Soluciones disponibles: " + arStack.size());
-        //System.out.print("\n Soluciones disponibles: " + arStack.size());
+        //System.out.print("\n Soluciones disponibles: " + arStack.getsize());
+        
         do{
-            juan = "";
+            //variables re inicializadas 
+            show = "";
+            option = 0;
             do{
-                option = Integer.parseInt(JOptionPane.showInputDialog(null, " Ingrese la solucion que desea ver: "));
+                confirm = JOptionPane.showInputDialog(null, " Ingrese la solucion que desea ver: ");
+                
+                //validacion
+                if (null == confirm)//si cancela sale del programa
+                    System.exit(0);
+                else if (onlyNumbers(confirm))//onlyNumbers() compara que solo ingrese numeros
+                    JOptionPane.showMessageDialog(null,"Solo puede ingresar numeros intente de nuevo");
+                else 
+                switch (confirm) {
+                    //confirma que la cadena no este vacia
+                    case "":
+                        JOptionPane.showMessageDialog(null," No puede dejar el campo vacio. intente de nuevo");
+                        break;
+                    //termino por defecto. todo bien
+                    default:
+                        option = Integer.parseInt(confirm);
+                        if(option < 1 || option > arStack.size())
+                            JOptionPane.showMessageDialog(null," No existe esa solucion. intente otra");
+                        break;
+                }
+
+            }while(option < 1 || option > arStack.size() && "".equals(confirm) && onlyNumbers(confirm));
             
-                if(option < 1 || option > arStack.size())
-                    JOptionPane.showMessageDialog(null," No existe esa solucion. intente otra");
-            
-            }while(option < 1 || option > arStack.size());
         
-            Stack<Integer> pilaS = arStack.get(option-1);
+            Pila<Integer> pilaS = arStack.get(option-1);
         
-            System.out.println(pilaS.isEmpty());
+            //System.out.println(pilaS.isEmpty());
 
             for(int row = 0; row < nQueens; row++ )
             {
@@ -59,22 +79,22 @@ class Resolve{
                     //puesto que al pila almacena la columna si cada fila (row) contendra
                     //el indice la columna
                     if (pilaS.get(row) == col)
-                        juan+=" Q ";
+                        show+=" Q ";
                         //System.out.print(" Q ");
-                    else juan+= " -- "; //System.out.print(" - ");
+                    else show+= " -- ";  //System.out.print(" - ");
                 }
                 //System.out.println();
-                juan+="\n";
+                show+="\n";
             }
         
-            JOptionPane.showMessageDialog(null,juan);
+            JOptionPane.showMessageDialog(null,show);
         }while(0 == JOptionPane.showConfirmDialog(null, "¿Quiere ver otra opcion?", "NQueens Problem", JOptionPane.YES_NO_OPTION));
         
     }
     
     private boolean check(int row, int col)
     {
-        //comparamo sel indice de la columna con la columna en la que estamos
+        //comparamos el indice de la columna con la columna en la que estamos
         /*
          * Si la columna actual es igual al indice se marca el fallo
          * Si el indice - la posicion actual es igual a la diagonal principal se marca el fallo
@@ -101,7 +121,7 @@ class Resolve{
             //comparamos cada columna mientras que la columna no supere el numero de reinas
             while(col < nQueens)
             {
-                if (check(pila.size(),col)){
+                if (check(pila.getsize(),col)){
                     pila.push(col);//guardamos el indice de la columna
                     col = 0;
                     break;
@@ -112,21 +132,23 @@ class Resolve{
             
             if (col == nQueens)
                 //si la pila esta vacia es porque ya exploramos todas las soluciones
-                if (pila.empty())
+                if (pila.isEmpty())
                     break;
                 else col = pila.pop() + 1;//caso contrario iteramos a la siguiente columna y eliminamos el error
             
-            if (pila.size() == nQueens)
+            if (pila.getsize() == nQueens)
             {
                 //showS(pila);
                 
-                //instacio una nueva pila donde guardare los indice 
-                Stack<Integer> solutionStack = new Stack<>();
+                //instancio una nueva pila donde guardare los indice 
+                
+                
+                Pila<Integer> solutionStack = new Pila<>();
                  
                 //guardamos los indices en la pila
-                pila.forEach((queenCol) -> {
-                    solutionStack.push(queenCol);
-                });
+                for(int i = 0; i < pila.getsize(); i++)
+                    solutionStack.push(pila.get(i));
+                
                 
                 //guardamos la pila en la lista
                 arStack.add(solutionStack);
@@ -138,7 +160,22 @@ class Resolve{
                 //break;
             }
             
+            //System.out.println(pila.getsize());
+            
         }
+        
+    }
+    
+    private boolean onlyNumbers(String str)
+    {
+        //bucle foreach para recorrer toda las posiciones de la cadena
+        //el metodo ToCharArray() convierte la cadena en una cadena de caracteres
+        for (char Char : str.toCharArray())
+        {
+            if (Char < '0' || Char > '9' && Char != ' ')
+            return true;
+        }
+        return false;
     }
 }
 
@@ -146,14 +183,16 @@ class Resolve{
 public class NQueenI {
    
     public static void main(String[] args) {
-        Scanner keyboard = new Scanner(System.in);
         //System.out.print("\n Ingrese el numero de reinas: ");
-        
+        String confirm;
         
         Resolve reSolution = new Resolve();
-        int nQ = Integer.parseInt(JOptionPane.showInputDialog(null, " Ingrese el numero de reinas: "));
+        confirm = JOptionPane.showInputDialog(null, " Ingrese el numero de reinas: ");
         
-
+        if (confirm == null)
+            System.exit(0);
+        
+        int nQ = Integer.parseInt(confirm);
         
         while (nQ <= 3)
         {
@@ -164,7 +203,6 @@ public class NQueenI {
         reSolution.setnQueens(nQ);
         reSolution.solution();
         reSolution.showS();
-  
         
     }   
 }
