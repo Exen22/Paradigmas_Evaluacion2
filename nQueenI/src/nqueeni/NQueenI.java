@@ -1,9 +1,6 @@
 
 package nqueeni;
 
-
-import java.util.Scanner;
-import java.util.Stack;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 //import java.util.Arrays;
@@ -166,6 +163,7 @@ class Resolve{
         
     }
     
+    //Comprobar que una cadena solo contenga numeros
     private boolean onlyNumbers(String str)
     {
         //bucle foreach para recorrer toda las posiciones de la cadena
@@ -200,9 +198,9 @@ public class NQueenI {
             nQ = Integer.parseInt(JOptionPane.showInputDialog(null, " Ingrese el numero de reinas: "));    
         } 
         
-        reSolution.setnQueens(nQ);
-        reSolution.solution();
-        reSolution.showS();
+        reSolution.setnQueens(nQ);//determinar el numero de reinas
+        reSolution.solution();//ejecutar solucion (Backtracking)
+        reSolution.showS();//mostrar resultado
         
     }   
 }
