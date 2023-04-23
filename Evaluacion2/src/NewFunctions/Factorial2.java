@@ -40,6 +40,7 @@ public class Factorial2 {
         this.num = num;
         
     }
+    
     //sacar factorial con recursividad
     private long process(long n){
         aux = n;
@@ -51,6 +52,7 @@ public class Factorial2 {
         }
         return aux;
     }
+    
     //mostrar el factorial
     public void showFact(){
         fact = process(this.num);

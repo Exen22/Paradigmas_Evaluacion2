@@ -32,10 +32,19 @@ public class MainDePruebas {
         pri.showN();
     */
     
-        //PRUEBA Factorial2
+    /*    //PRUEBA Factorial2
         Factorial2 fac = new Factorial2();
         fac.setNum();
         //fac.setNum(6);
         fac.showFact();
+    */
+
+        //PRUEBA McmandMcd2
+        McmandMcd2 mc = new McmandMcd2();
+        mc.setNums(); //establecer los 3 numeros a sacar su MCM Y MCD
+        mc.showMcd(); //mostrar desde JOptionPane el MCD de los numeros ingresados
+        mc.showMcm(); //mostrar desde JOptionPane el MCM de los numeros ingresados
+        JOptionPane.showMessageDialog(null, "mcm: "+mc.mcm()); /*Mostrar el mcm de los numeros ingresados directamente con 
+        la funcion mcm() y mcd para el MCD respectivamente*/
     }     
 }
