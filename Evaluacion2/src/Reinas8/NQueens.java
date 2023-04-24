@@ -141,9 +141,9 @@ public class NQueens{
                     else
   
                         if ((row + col) % 2 == 0) {
-                            show += "\u25A0"; // Caracter Unicode para el cuadrado negro
+                            show += "\u25A1"; // Caracter Unicode para el cuadrado negro
                         } else {
-                            show += "\u25A1"; // Caracter Unicode para el cuadrado blanco
+                            show += "\u25A0"; // Caracter Unicode para el cuadrado blanco
                         //show+= " -- ";
                         }
                 }
