@@ -105,8 +105,19 @@ public class NQueens{
                 confirm = JOptionPane.showInputDialog(null, " Ingrese la solucion que desea ver: ");
                 
                 //validacion
-                if (null == confirm)//si cancela sale del programa
-                    System.exit(0);
+                if (null == confirm){//si cancela sale del programa
+                    
+                    int opc =JOptionPane.showConfirmDialog(null,"Esta seguro que quiere volver al Menu?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+
+                    if (opc==JOptionPane.YES_OPTION){
+                        throw new NullPointerException();
+                    }
+                    else{
+                        continue;  
+                    }
+                    
+                }
+                    //System.exit(0);
                 else if (onlyNumbers(confirm))//onlyNumbers() compara que solo ingrese numeros
                     JOptionPane.showMessageDialog(null,"Solo puede ingresar numeros intente de nuevo");
                 else 

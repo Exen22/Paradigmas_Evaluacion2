@@ -23,27 +23,49 @@ public class QuadraticEc2 {
     
     //set de variables y llamada a metodo proceso
     public void setVar(){
-        try{
-            a = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese el valor de 'a'."));
-            b = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese el valor de 'b'."));
-            c = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese el valor de 'c'."));
-            
-            //lo que está dentro de la raiz cuadrada de la ecuación
-            root = b*b - 4*a*c;
-            
-            //llamo a la funcion process para sacar los resultados y guardarlos 
-            process();
-            flag = true;
-        }
-        catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "Valor invalido");
-            flag = false;
-        }
-        catch(NullPointerException e){
-            //SI LE DA A CANCELAR
-            flag = false;
-        }
+        String aux1 = "";
         
+        do{
+            try{
+                a = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese el valor de 'a'."));
+                b = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese el valor de 'b'."));
+                c = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese el valor de 'c'."));
+                
+                String a2, b2, c2;
+                a2 = Double.toString(a);
+                b2 = Double.toString(b);
+                c2 = Double.toString(c);
+                
+                if(a2 == null || b2 == null || c2 == null){
+                    throw new NullPointerException();
+                }
+                
+
+                //lo que está dentro de la raiz cuadrada de la ecuación
+                root = b*b - 4*a*c;
+
+                //llamo a la funcion process para sacar los resultados y guardarlos 
+                process();
+                flag = true;
+                aux1 = "";
+            }
+            catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Valor invalido");
+                aux1 = null;
+            }
+            catch(NullPointerException e){
+                int opc =JOptionPane.showConfirmDialog(null,"Esta seguro que quiere volver al Menu?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+                flag = false;
+
+                if (opc==JOptionPane.YES_OPTION){
+                    throw new NullPointerException();
+                }
+                else{
+                    continue;  
+                }
+            }
+            
+        }while(aux1 == null);
     }
     
     //Proceso

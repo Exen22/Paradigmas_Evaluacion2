@@ -14,36 +14,56 @@ public class Cajero2 {
     }
     
     public void setMoney(){
-        try{
-            String nMoney2 = JOptionPane.showInputDialog(null, "Ingrese la cantidad de dinero a desglosar: ");
-            //DEJARLO CON SOLO 2 DECEMALES Y PASARLO A DOUBLE
-            int dotIndex = nMoney2.indexOf('.');
-            if (dotIndex != -1 && dotIndex + 3 < nMoney2.length()) {
-            nMoney2 = nMoney2.substring(0, dotIndex + 3);
-            }
-            double nMoney = Double.parseDouble(nMoney2);
-            
-            this.money = nMoney;
-            
-            
-            //Sacar la parte decimal y guardarla en cent (lo pasé a float porque en double no me da el valor exacto de las 2 primeras decimales)
-            int aux = (int) money;
-            float cent2 =(float) ((money - aux));
-            cent = (int) (cent2 * 100);
-            //cent = (int)((money - Math.floor(money))*100);//parte decimal del dinero (los centavos) (FUNCION NO SACA EXACTOS LOS DECIMALES DE UN DOUBLE)
-            /*int aux = (int) money;
-            cent =(int) ((money - aux)*100);*/ //la misma parte decimal pero sin la funcion
-            
-            b100 = 0; b50 = 0; b20 = 0; b10 = 0; b5 = 0; b2 = 0; b1 = 0; m25 = 0; m5=0; m1 = 0; total = 0;
-            decompose();
-        }
-        catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "Valor invalido");
-        }
-        catch(NullPointerException e){
-            //AQUI PONER LO QUE EL PROGRAMA DEBE HACER SI EL USUARIO LE DA A CANCELAR MIENTRAS PIDE UN VALOR
-        }
+        String aux1 = null;
         
+        do{
+            try{
+                String nMoney2 = JOptionPane.showInputDialog(null, "Ingrese la cantidad de dinero a desglosar: ");
+                
+                aux1 = nMoney2;
+                //CANCELAR
+                if(aux1 == null){
+                    throw new NullPointerException();
+                }
+                
+                //DEJARLO CON SOLO 2 DECEMALES Y PASARLO A DOUBLE
+                int dotIndex = nMoney2.indexOf('.');
+                if (dotIndex != -1 && dotIndex + 3 < nMoney2.length()) {
+                nMoney2 = nMoney2.substring(0, dotIndex + 3);
+                }
+                double nMoney = Double.parseDouble(nMoney2);
+
+                this.money = nMoney;
+
+
+                //Sacar la parte decimal y guardarla en cent (lo pasé a float porque en double no me da el valor exacto de las 2 primeras decimales)
+                int aux = (int) money;
+                float cent2 =(float) ((money - aux));
+                cent = (int) (cent2 * 100);
+                //cent = (int)((money - Math.floor(money))*100);//parte decimal del dinero (los centavos) (FUNCION NO SACA EXACTOS LOS DECIMALES DE UN DOUBLE)
+                /*int aux = (int) money;
+                cent =(int) ((money - aux)*100);*/ //la misma parte decimal pero sin la funcion
+
+                b100 = 0; b50 = 0; b20 = 0; b10 = 0; b5 = 0; b2 = 0; b1 = 0; m25 = 0; m5=0; m1 = 0; total = 0;
+                decompose();
+
+            }
+            catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Valor invalido");
+                aux1 = null;
+            }
+            catch(NullPointerException e){
+                int opc =JOptionPane.showConfirmDialog(null,"Esta seguro que quiere volver al Menu?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+
+                if (opc==JOptionPane.YES_OPTION){
+                    throw new NullPointerException();
+                }
+                else{
+                    continue;  
+                }
+            }
+            
+        }while(aux1 == null);
     }
     
     public double getMoney(){
