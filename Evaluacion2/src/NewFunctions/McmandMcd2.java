@@ -100,13 +100,13 @@ public class McmandMcd2 {
                 } while (residue != 0);
             }
         }
-        this.mcdF = mcd;
+        
         return mcd;
     }
     
     public void showMcd(){
         try{
-        mcd();
+        mcdF = mcd();
         JOptionPane.showMessageDialog(null, "El Maximo Comun divisor de los numeros ingresados es: "+mcdF);
         }
         catch(ArithmeticException e){

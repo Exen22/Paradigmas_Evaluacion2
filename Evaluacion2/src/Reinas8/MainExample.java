@@ -1,5 +1,5 @@
 
-package nqueensr;
+package Reinas8;
 
 //descomentar en caso de necesitarlo
 //import javax.swing.JOptionPane;
@@ -34,6 +34,7 @@ public class MainExample {
         
         //resolve.setNqueens(nQ); //Determinado por el usuario
         
+       
         resolve.setNqueens(8);//Numero de reinas fijo
         
         resolve.process(0);//iniciamos en 0; esto significa que iniciamos en la fila 0

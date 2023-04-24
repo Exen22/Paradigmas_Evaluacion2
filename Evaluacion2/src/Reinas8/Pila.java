@@ -1,5 +1,5 @@
 
-package nqueensr;
+package Reinas8;
 
 public class Pila<T> {
     

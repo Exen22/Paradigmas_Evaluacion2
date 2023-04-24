@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package nqueensr;
+package Reinas8;
 
 public class Nodo<T> {
     private T date;

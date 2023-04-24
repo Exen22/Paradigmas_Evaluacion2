@@ -1,8 +1,11 @@
 
-package nqueensr;
+package Reinas8;
 
+import java.awt.Font;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class NQueens{
     
@@ -131,16 +134,33 @@ public class NQueens{
                 {
                     //puesto que al pila almacena la columna si cada fila (row) contendra
                     //el indice la columna
-                    if (pilaS.get(row) == col)
-                        show+=" ♕ ";
-                        //System.out.print(" Q ");
-                    else show+= " -- ";  //System.out.print(" -- ");
+                    if (pilaS.get(row) == col){
+                        show+="♛";
+                    }
+                    
+                    else
+  
+                        if ((row + col) % 2 == 0) {
+                            show += "\u25A0"; // Caracter Unicode para el cuadrado negro
+                        } else {
+                            show += "\u25A1"; // Caracter Unicode para el cuadrado blanco
+                        //show+= " -- ";
+                        }
                 }
                 //System.out.println();
-                show+="\n";
+                show += "\n";
             }
-        
-            JOptionPane.showMessageDialog(null,show);
+            
+            // Ajusta el tamaño de la fuente 
+            Font font = new Font("monospaced", Font.PLAIN, 30);
+
+            //el area de texto es necesaria para aumentar de tamano la tipografia
+            JTextArea textArea = new JTextArea(show);//Creamos un area de texto para mostrar las reinas
+            textArea.setFont(font);//guardamos la fuenta ya modificada en el area de texto
+            textArea.setEditable(false);//hacemos que no sea pueda editar
+            //mostramos mensaje
+            JOptionPane.showMessageDialog(null, new JScrollPane(textArea), "Solución encontrada", JOptionPane.INFORMATION_MESSAGE);
+            
         }while(0 == JOptionPane.showConfirmDialog(null, "¿Quiere ver otra solucion?", "NQueens Problem", JOptionPane.YES_NO_OPTION));
         
     }
