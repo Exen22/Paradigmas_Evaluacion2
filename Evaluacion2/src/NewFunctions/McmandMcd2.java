@@ -1,24 +1,7 @@
 package NewFunctions;
 
-import FunctionsPkg.*;
 import javax.swing.JOptionPane;
-/*int []numbers = new int[3];
-               
-               
-                        System.out.print("\n\n\n\n\t MCM y MCD de 3 numueros\n\n");
-                        System.out.print("\n\n Ingrese los numeros \n\n");
-               
-                        for (int i = 0; i < 3; i++)
-                        {
-                            System.out.print("\n Numero " + (i+1) + ": ");
-                            numbers[i] = (int) _validF.validate();
-                            //numbersAux[i] = numbers[i];
-                        }
-                    
-                        McmandMcd mcmAndmcd = new McmandMcd(numbers);
-                    
-                        System.out.print("\n\n El M.C.M es: " + mcmAndmcd.mcm() );
-                        System.out.print("\n El M.C.D es: " + mcmAndmcd.mcd()); */
+
 public class McmandMcd2 {
     
     private final int[]numbers;

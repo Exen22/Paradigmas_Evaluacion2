@@ -1,7 +1,5 @@
 package OldFunctions_SoloParaRevisarElCodigoViejo;
 
-import FunctionsPkg.ValidF;
-
 public class Primos {
     
     private int number;
