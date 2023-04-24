@@ -2,10 +2,6 @@ package NewFunctions;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Willian Coral
- */
 public class Primos2 {
     private int number;
     private int n_primos;
@@ -59,9 +55,6 @@ public class Primos2 {
 
                 if (opc==JOptionPane.YES_OPTION){
                     throw new NullPointerException();
-                }
-                else{
-                    continue;  
                 }
                 //JOptionPane.showMessageDialog(null, "");
             }

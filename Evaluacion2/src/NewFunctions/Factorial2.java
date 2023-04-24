@@ -2,10 +2,7 @@ package NewFunctions;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Willian Coral
- */
+
 public class Factorial2 {
     private long num, aux, fact;
     
@@ -53,10 +50,7 @@ public class Factorial2 {
 
                 if (opc==JOptionPane.YES_OPTION){
                     throw new NullPointerException();
-                }
-                else{
-                    continue;  
-                }
+                }      
             }
         }while(aux1 == null);
     }

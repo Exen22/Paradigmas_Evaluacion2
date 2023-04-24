@@ -1,7 +1,7 @@
 package NewFunctions;
 import javax.swing.JOptionPane;
-import Reinas8.NQueens;
-//import static NewFunctions.ayuda.esNumero;
+import Reinas8.NQueens;//importar paquete donde se guarda el programas de las Reinas
+import javax.swing.UIManager;
 
 /*
 
@@ -19,36 +19,43 @@ public class Main_Menu {
     
 
     //el usuario es Admin con A mayuscula porque sino no funciona y la clave es 1234
+    
+    //suprimir alarma innecesaria
+    @SuppressWarnings("null")
     public static void main(String[] args) {
         
         //Constantes
         final String user = "Admin", userpassword = "1234";
-
+        
+        // Establecer los valores predeterminados de los botones
+        UIManager.put("OptionPane.okButtonText", "Aceptar");
+        UIManager.put("OptionPane.cancelButtonText", "Salir");
+        
         login(user, userpassword);
     
         String option = null;
-        boolean sigue = true;
+        boolean confirm  = true;
         
         do {
             
            try{
                 do{
-                    option = (String) JOptionPane.showInputDialog(null,"\n1. Sacar el factorial de un numero "
+                    option = (String) JOptionPane.showInputDialog(null,"\n1. Factorial de un numero "
                         + "\n2. Determinar los numeros primos y compuestos de los numeros ingesados "
                         + "\n3. Cajero Automatico \n4. Determinar los valores reales e imaginarios de una ecuacion de segundo grado "
-                        + "\n5. Sacar el MCM y el MCD de 3 numeros\n6. Programa de las 8 reinas "
-                        + "\n7. Salir." + "\n\n Introduzca la operacion que desea realizar"," MENU",JOptionPane.PLAIN_MESSAGE);
+                        + "\n5. MCM y el MCD de 3 numeros\n6. Problema de las 8 reinas "
+                        + "\n\n Introduzca la operacion que desea realizar"," MENU",JOptionPane.PLAIN_MESSAGE,null,null,null);
                                                                //PLAIN_MESSAGE es para que en vez de Entrada arriba diga MENU
                     if(option==null)throw new NullPointerException();
                 
                     if(esNumero(option)){
-                        sigue=true;
+                        confirm = true;
                     }
                     else{
-                        JOptionPane.showMessageDialog(null,"Ha ingresado un caracter");
-                        sigue=false;
+                        JOptionPane.showMessageDialog(null,"Opcion Invalida");
+                        confirm = false;
                     }
-                }while(sigue!=true);
+                }while(confirm != true);
             }
             catch(NullPointerException e){
                 
@@ -69,81 +76,103 @@ public class Main_Menu {
                  
                 //FACTORIAL
                 case 1:
-                    Factorial2 fac = new Factorial2();
-                    
+                   
                     try{
+                            
+                        do{
                         
-                        fac.setNum();
-                        fac.showFact();  
-                        
+                            Factorial2 fac = new Factorial2();
+                    
+                            fac.setNum();
+                            fac.showFact();  
+                        }while(0 == JOptionPane.showConfirmDialog(null, "¿Desea calcular nuevamente el factorial?", "Factorial", JOptionPane.YES_NO_OPTION));
+                            
                     }catch(NullPointerException e){
-                        continue;
+                        JOptionPane.showMessageDialog(null, "No se ha calculado el factorial debido a que el objeto es nulo.");
                     }
-                                    
-                break;
+                
+                    break;
                      
                 //NUMEROS PRIMOS    
                 case 2:
-                    Primos2 pri = new Primos2();
                     
                     try{
                         
-                        pri.setNum();
-                        pri.showN();
+                        do{
+                        
+                            Primos2 pri = new Primos2();
+                        
+                            pri.setNum();
+                            pri.showN();
+                            
+                        }while(0 == JOptionPane.showConfirmDialog(null, "¿Desea volver nuevamente a determinar numeros?", "Primos o Compuestos", JOptionPane.YES_NO_OPTION));
                         
                     }catch(NullPointerException e){
-                        continue;
+                        JOptionPane.showMessageDialog(null, "No se ha determinado el numero debido a que el objeto es nulo.");
                     }
-                break;
+
+                    break;
                  
                 //CAJERO
                 case 3:
-                    Cajero2 caj = new Cajero2();
-                    
+                       
                     try{
                         
-                    caj.setMoney(); 
-                    caj.showBill(); 
-                    
+                        do{
+                            
+                            Cajero2 caj = new Cajero2();    
+                            caj.setMoney(); 
+                            caj.showBill(); 
+                            
+                        }while(0 == JOptionPane.showConfirmDialog(null, "¿Desea volver a intentar con otra cantidad?", "Cajero", JOptionPane.YES_NO_OPTION));
+                        
                     }catch(NullPointerException e){
-                        continue;
+                        JOptionPane.showMessageDialog(null, " No se ha desglosado el numero debido a que el objeto es nulo.");
                     }
-                break;
+                        
+                    break;
                  
-                 //ECUACION 2DO GRADO
+                //ECUACION 2DO GRADO
                 case 4:
-                    QuadraticEc2 ec = new QuadraticEc2();
                     
                     try{
                         
-                        ec.setVar();
-                        ec.showResult(); 
+                        do{
+                            
+                            QuadraticEc2 ec = new QuadraticEc2();
+                            ec.setVar();
+                            ec.showResult(); 
+                            
+                        }while(0 == JOptionPane.showConfirmDialog(null, "¿Desea volver a calcular otra ecuacion?", "Ecuacion Segundo Grado", JOptionPane.YES_NO_OPTION));
                         
                     }catch(NullPointerException e){
-                        continue;
+                        JOptionPane.showMessageDialog(null, "No se pudo calcular la ecuacion debido a que el objeto es nulo.");
                     }
-        
                     
-                break;
-                 
-                 
+                    break;
+
                 //MCM Y MCD
                 case 5:
-                    McmandMcd2 mc = new McmandMcd2();
                     
                     try{
                         
-                    mc.setNums(); 
-                    mc.showMcd(); 
-                    mc.showMcm(); 
-                    
+                        do{
+                            McmandMcd2 mc = new McmandMcd2();
+                            mc.setNums(); 
+                            mc.showMcd(); 
+                            mc.showMcm();
+                            
+                        }while(0 == JOptionPane.showConfirmDialog(null, "¿Desea volver a calcular el MCM Y MCD de otros 3 numeros?", "MCM Y MCD", JOptionPane.YES_NO_OPTION));
+                        
                     }catch(NullPointerException e){
-                        continue;
+                        JOptionPane.showMessageDialog(null, "No se pudo calcular el MCM ni el MCD debido a que el objeto es nulo.");
                     }
-                break;
+
+                    break;
                  
                 //8 REINAS
                 case 6:
+                    
                     NQueens resolve = new NQueens();//inicializamos el numero de reinas en el constructor
                     
                     try{
@@ -156,28 +185,16 @@ public class Main_Menu {
                         resolve.show();
                         
                     }catch(NullPointerException e){
-                        continue;
+                        JOptionPane.showMessageDialog(null, "No se ha resuelto el problema debido a que el objeto es nulo.");
                     }
                     
                      
                     break;
-                 
-                //SALIR
-                case 7: 
-                    int opc =JOptionPane.showConfirmDialog(null,"Esta seguro de salir del programa?", "Confirmacion", JOptionPane.YES_NO_OPTION);
                 
-                    if (opc==JOptionPane.YES_OPTION){
-                        System.exit(0);
-                    }
-                    else{
-                        option = "0";
-                    }
-                break;
-                 
                 default:
-                    JOptionPane.showMessageDialog(null,"opcion Invalida");  
+                    JOptionPane.showMessageDialog(null,"Opcion Invalida");  
             }
-        }while(!"7".equals(option));
+        }while(option != null);
     }   
 
     //funcion para validar sesions

@@ -132,7 +132,7 @@ public class McmandMcd2 {
         JOptionPane.showMessageDialog(null, "El Maximo Comun divisor de los numeros ingresados es: "+mcdF);
         }
         catch(ArithmeticException e){
-            
+            JOptionPane.showMessageDialog(null, "Error: Los numeros ingresados no son validos para calcular el MCD.");
         }
     }
     
@@ -142,7 +142,7 @@ public class McmandMcd2 {
         JOptionPane.showMessageDialog(null, "El Minimo Comun multiplo de los numeros ingresados es: "+mcmF);
         }
         catch(ArithmeticException e){
-            
+            JOptionPane.showMessageDialog(null, "Error: Los numeros ingresados no son validos para calcular el MCM.");
         }
     }
     

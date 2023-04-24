@@ -2,10 +2,6 @@ package NewFunctions;
 
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Willian Coral
- */
 public class QuadraticEc2 {
             
     private double a, b, c, root;
@@ -60,9 +56,7 @@ public class QuadraticEc2 {
                 if (opc==JOptionPane.YES_OPTION){
                     throw new NullPointerException();
                 }
-                else{
-                    continue;  
-                }
+                
             }
             
         }while(aux1 == null);

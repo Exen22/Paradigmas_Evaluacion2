@@ -58,9 +58,7 @@ public class Cajero2 {
                 if (opc==JOptionPane.YES_OPTION){
                     throw new NullPointerException();
                 }
-                else{
-                    continue;  
-                }
+              
             }
             
         }while(aux1 == null);

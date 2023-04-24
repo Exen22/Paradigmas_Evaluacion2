@@ -112,10 +112,7 @@ public class NQueens{
                     if (opc==JOptionPane.YES_OPTION){
                         throw new NullPointerException();
                     }
-                    else{
-                        continue;  
-                    }
-                    
+    
                 }
                     //System.exit(0);
                 else if (onlyNumbers(confirm))//onlyNumbers() compara que solo ingrese numeros
@@ -138,32 +135,39 @@ public class NQueens{
             
         
             Pila<Integer> pilaS = solutions.get(option-1);
-
+            
+            
+            int i = nqueens; // Usaremos i para marcar los numeros del lado izquierdo del tablero
+            
             for(int row = 0; row < nqueens; row++ )
             {
+                show += " " + String.valueOf(i--)+" ";//poner indice de tabla al lado izqierdo
+                
                 for (int col = 0; col < nqueens;col++)
                 {
+
                     //puesto que al pila almacena la columna si cada fila (row) contendra
                     //el indice la columna
                     if (pilaS.get(row) == col){
-                        show+="♛";
+                        show += "♛";//Caracter de Reina
                     }
                     
                     else
   
                         if ((row + col) % 2 == 0) {
-                            show += "\u25A1"; // Caracter Unicode para el cuadrado negro
+                            show += "■";// Caracter Unicode para el cuadrado negro
                         } else {
-                            show += "\u25A0"; // Caracter Unicode para el cuadrado blanco
-                        //show+= " -- ";
+                            show += "□";// Caracter Unicode para el cuadrado blanco
+                        
                         }
                 }
-                //System.out.println();
                 show += "\n";
             }
+            show += "   A B C D E F G H     ";//indice en caracteres del tablero
+            show += "\n\n[" + getIndex(pilaS) + "]";
             
             // Ajusta el tamaño de la fuente 
-            Font font = new Font("monospaced", Font.PLAIN, 30);
+            Font font = new Font("Serif", Font.PLAIN, 30);
 
             //el area de texto es necesaria para aumentar de tamano la tipografia
             JTextArea textArea = new JTextArea(show);//Creamos un area de texto para mostrar las reinas
@@ -181,16 +185,74 @@ public class NQueens{
     }
     
     //Comprobar que una cadena solo contenga numeros
-    private boolean onlyNumbers(String str)
-    {
-        //bucle foreach para recorrer toda las posiciones de la cadena
-        //el metodo ToCharArray() convierte la cadena en una cadena de caracteres
-        for (char Char : str.toCharArray())
-        {
-            if (Char < '0' || Char > '9' && Char != ' ')
-            return true;
+    private boolean onlyNumbers(String str) {
+        
+        try {
+        
+            for (char Char : str.toCharArray()) {
+                if (Char < '0' || Char > '9' && Char != ' ')
+                    return true;
+            }
+            return false;
+        
+        } catch (Exception e) {
+        
+            System.out.println("Se produjo un error en el método onlyNumbers: " + e.getMessage());
+            return false; // O retornar un valor predeterminado en caso de error
         }
-        return false;
+    }
+    
+    //obtener posiciones de la reina
+    private String getIndex(Pila<Integer> index)
+    {
+        char[] indexStr = new char[index.getsize()];
+        
+        //guardar indices
+        for(int i = 0; i < index.getsize(); i++)
+            
+            switch(index.get(i)){
+                
+                case 0:
+                    indexStr[i] = 'A';
+                    break;
+                case 1:
+                    indexStr[i] = 'B';
+                    break;
+                case 2:
+                    indexStr[i] = 'C';
+                    break;
+                case 3:
+                    indexStr[i] = 'D';
+                    break;
+                case 4:
+                    indexStr[i] = 'E';
+                    break;
+                case 5:
+                    indexStr[i] = 'F';
+                    break;
+                case 6:
+                    indexStr[i] = 'G';
+                    break;
+                case 7:
+                    indexStr[i] = 'H';
+                    break;
+                    
+            }
+        String indexReturn = "";
+        
+        //guardar posiciones
+        int i  = nqueens;
+        
+        while(i >= 1)
+        {
+            if (i == 1)
+                indexReturn += indexStr[nqueens-i] + String.valueOf(i--);
+
+            else indexReturn += indexStr[nqueens-i] + String.valueOf(i--) + ",";
+            
+        }
+        
+        return indexReturn;
     }
 }
 
