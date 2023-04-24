@@ -30,6 +30,7 @@ public class Factorial2 {
         }
         catch(NumberFormatException e){
             JOptionPane.showMessageDialog(null, "Valor invalido");
+            
         }
         
     }

@@ -106,7 +106,7 @@ public class McmandMcd2 {
     
     public void showMcd(){
         try{
-        mcm();
+        mcd();
         JOptionPane.showMessageDialog(null, "El Maximo Comun divisor de los numeros ingresados es: "+mcdF);
         }
         catch(ArithmeticException e){

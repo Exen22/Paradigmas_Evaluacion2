@@ -28,8 +28,11 @@ public class Primos2 {
         
         try{
             int nAux = 1;
+            int count = 1;
             while(nAux != 0){
-                nAux = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese un numero o Ingrese '0' para salir"));
+                nAux = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese un numero "
+                        + "o Ingrese '0' para mostrar la cantidad de numeros primos ingresados\n["+count+"]: "));
+                count++;
                 if(nAux!= 0){
                     this.number = nAux;
                     process();
