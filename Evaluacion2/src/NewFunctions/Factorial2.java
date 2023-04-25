@@ -14,25 +14,51 @@ public class Factorial2 {
     }
     
     //ingresar el numero
-    public void setNum(){
-        try{
-            long num1;
-            do{
-                num1 = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese un numero a sacar su factorial: "));
-                if(num1 < 0){
-                    JOptionPane.showMessageDialog(null, "Ingrese un valor positivo");
-                }
-            }while(num1 < 0);
-            
-            num = num1;
-            aux = 1;
-            
-        }
-        catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "Valor invalido");
-            
-        }
+    public void setNum() throws NullPointerException{
         
+        String aux1 = null;
+        do{
+            
+            try{
+                long num1 = 0;
+                
+                do{
+                    aux1 = JOptionPane.showInputDialog(null, "Ingrese un numero a sacar su factorial: ");
+                    
+                    //CANCELAR
+                    if(aux1 == null){
+                        throw new NullPointerException();
+
+                    }
+
+                    num1 = Integer.parseInt(aux1);
+                    
+                    if(num1 < 0){
+                        JOptionPane.showMessageDialog(null, "Ingrese un valor positivo");
+                    }
+                }while(num1 < 0);
+
+                num = num1;
+                aux = 1;
+
+            }
+            catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Valor invalido");
+                aux1=null;
+
+
+            }
+            catch(NullPointerException e){
+                int opc =JOptionPane.showConfirmDialog(null,"Esta seguro que quiere volver al Menu?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+
+                if (opc==JOptionPane.YES_OPTION){
+                    throw new NullPointerException();
+                }
+                else{
+                    continue;  
+                }
+            }
+        }while(aux1 == null);
     }
     
     //Ingreso manual

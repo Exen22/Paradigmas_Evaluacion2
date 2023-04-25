@@ -18,27 +18,49 @@ public class McmandMcd2 {
     }
     
     public void setNums(){
-        try{
-            int[] auxNumbers = new int[3];
+        String aux1 = null;
         
-            for(int i=0; i<3; i++){
-                auxNumbers[i] = Integer.parseInt(JOptionPane.showInputDialog(null, "MCM y MCD de 3 numueros\nIngrese los numeros"
-                       + "\n\n Numero " + (i+1) + ": "));
+        do{
+            try{
+                int[] auxNumbers = new int[3];
+
+                for(int i=0; i<3; i++){
+                    /*auxNumbers[i] = Integer.parseInt(JOptionPane.showInputDialog(null, "MCM y MCD de 3 numueros\nIngrese los numeros"
+                           + "\n\n Numero " + (i+1) + ": "));*/
+                    aux1 = JOptionPane.showInputDialog(null, "MCM y MCD de 3 numueros\nIngrese los numeros"
+                           + "\n\n Numero " + (i+1) + ": ");
+                    
+                    if(aux1 == null){
+                        throw new NullPointerException();
+                    }
+                    
+                    auxNumbers[i] = Integer.parseInt(aux1);
+                }
+
+
+                for (int i = 0; i < auxNumbers.length; i++)
+                {
+                    numbers[i] = auxNumbers[i];
+                    numbersAux[i] = auxNumbers[i];
+                }
             }
-        
-        
-            for (int i = 0; i < auxNumbers.length; i++)
-            {
-                numbers[i] = auxNumbers[i];
-                numbersAux[i] = auxNumbers[i];
+            
+            //CATCHS
+            catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(null, "Valor Invalido");
+                aux1 = null;
             }
-        }
-        catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "Valor Invalido");
-        }
-        catch(NullPointerException e){
-            //
-        }
+            catch(NullPointerException e){
+                int opc =JOptionPane.showConfirmDialog(null,"Esta seguro que quiere volver al Menu?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+
+                if (opc==JOptionPane.YES_OPTION){
+                    throw new NullPointerException();
+                }
+                else{
+                    continue;  
+                }
+            }
+        }while(aux1 == null);
     }
     
     public int mcm(){

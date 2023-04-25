@@ -7,17 +7,17 @@ import Reinas8.NQueens;
 public class Logineval2 {
     
 
-    //el usuario es Gato con G mayuscula porque sino no funciona y la clave es felino
+    //el usuario es Admin con A mayuscula porque sino no funciona y la clave es 1234
     public static void main(String[] args) {
         
         //Constantes
         final String user = "Admin", userpassword = "1234";
 
         login(user, userpassword);
-       
     
-        String option = "";
+        String option = null;
         boolean sigue = true;
+        
         do {
             
            try{
@@ -28,7 +28,7 @@ public class Logineval2 {
                         + "\n5. Sacar el MCM y el MCD de 3 numeros\n6. Programa de las 8 reinas "
                         + "\n7. Salir." + "\n\n Introduzca la operacion que desea realizar"," MENU",JOptionPane.PLAIN_MESSAGE);
                                                                //PLAIN_MESSAGE es para que en vez de Entrada arriba diga MENU
-                    if(option==null)throw new Exception();
+                    if(option==null)throw new NullPointerException();
                 
                     if(esNumero(option)){
                         sigue=true;
@@ -39,7 +39,7 @@ public class Logineval2 {
                     }
                 }while(sigue!=true);
             }
-            catch(Exception e){
+            catch(NullPointerException e){
                 
                 int opc =JOptionPane.showConfirmDialog(null,"Esta seguro de salir del programa?", "Confirmacion", JOptionPane.YES_NO_OPTION);
                 
@@ -53,50 +53,82 @@ public class Logineval2 {
             
             int numero=Integer.parseInt(option);
             
+            //los try y catch con NullPointerException son por si el usuario pulsa cancelar dentro del respectivo programa
             switch(numero){
                  
                 //FACTORIAL
                 case 1:
                     Factorial2 fac = new Factorial2();
-                    fac.setNum();
-                    //fac.setNum(6);
-                    fac.showFact();                  
+                    
+                    try{
+                        
+                        fac.setNum();
+                        fac.showFact();  
+                        
+                    }catch(NullPointerException e){
+                        continue;
+                    }
+                                    
                 break;
                      
                 //NUMEROS PRIMOS    
                 case 2:
                     Primos2 pri = new Primos2();
-                    pri.setNum();
-                    //pri.setNum(1); //para ingresar directamente si se quiere hacer la interfaz desde el menú
-                    //pri.getPrimos(); pri.getComp(); //Para obtener el numero de primos y compuestos ingresados si se quiere hacer la interfaz desde el menu
-                    pri.showN();
+                    
+                    try{
+                        
+                        pri.setNum();
+                        pri.showN();
+                        
+                    }catch(NullPointerException e){
+                        continue;
+                    }
                 break;
                  
                 //CAJERO
                 case 3:
                     Cajero2 caj = new Cajero2();
-        
-                    caj.setMoney(); //ingresar cantidad de dinero y desglosar
-                    caj.showBill(); // mostrar la cantidad de billetes y monedas de cada tipo
+                    
+                    try{
+                        
+                    caj.setMoney(); 
+                    caj.showBill(); 
+                    
+                    }catch(NullPointerException e){
+                        continue;
+                    }
                 break;
                  
                  //ECUACION 2DO GRADO
                 case 4:
                     QuadraticEc2 ec = new QuadraticEc2();
+                    
+                    try{
+                        
+                        ec.setVar();
+                        ec.showResult(); 
+                        
+                    }catch(NullPointerException e){
+                        continue;
+                    }
         
-                    ec.setVar();//pide los valores y los procesa
-                    ec.showResult();//muestra los resultado
+                    
                 break;
                  
                  
                 //MCM Y MCD
                 case 5:
                     McmandMcd2 mc = new McmandMcd2();
-                    mc.setNums(); //establecer los 3 numeros a sacar su MCM Y MCD
-                    mc.showMcd(); //mostrar desde JOptionPane el MCD de los numeros ingresados
-                    mc.showMcm(); //mostrar desde JOptionPane el MCM de los numeros ingresados
-                    /*JOptionPane.showMessageDialog(null, "mcm: "+mc.mcm()); /*Mostrar el mcm de los numeros ingresados directamente con 
-                    la funcion mcm() y mcd para el MCD respectivamente*/
+                    
+                    try{
+                        
+                    mc.setNums(); 
+                    mc.showMcd(); 
+                    mc.showMcm(); 
+                    
+                    }catch(NullPointerException e){
+                        continue;
+                    }
                 break;
                  
                 //8 REINAS
@@ -137,12 +169,12 @@ public class Logineval2 {
             try{
                
                 nameUser =JOptionPane.showInputDialog(null,"Ingrese su nombre de usuario");
-                if(nameUser==null)throw new Exception();
+                if(nameUser==null)throw new NullPointerException();
           
                 password = JOptionPane.showInputDialog(null,"Ingrese su clave");
-                if(password==null)throw new Exception();
+                if(password==null)throw new NullPointerException();
              
-            }catch(Exception e){
+            }catch(NullPointerException e){
                 
                 int opc =JOptionPane.showConfirmDialog(null,"Esta seguro de salir del programa?", "Confirmacion", JOptionPane.YES_NO_OPTION);
                 
@@ -164,7 +196,10 @@ public class Logineval2 {
             } else {
                 
                 attempts++;
-                JOptionPane.showMessageDialog(null,"Nombre de usuario o clave incorrectos, intentelo de nuevo.");
+                if(attempts < 3){
+                    JOptionPane.showMessageDialog(null,"Nombre de usuario o clave incorrectos, intentelo de nuevo.");
+                }
+                
             }
             
             if (attempts == 3){
