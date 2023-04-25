@@ -1,7 +1,10 @@
 
-package Reinas8;
+package zPruebas;
 
 //descomentar en caso de necesitarlo
+
+import Reinas8.NQueens;
+
 //import javax.swing.JOptionPane;
 
 public class MainExample {

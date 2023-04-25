@@ -1,10 +1,21 @@
-
 package NewFunctions;
 import javax.swing.JOptionPane;
 import Reinas8.NQueens;
 //import static NewFunctions.ayuda.esNumero;
 
-public class Logineval2 {
+/*
+
+INTEGRANTES DEL GRUPO:
+
+Jose Flores C.I: 31.197.661
+Willian Coral C.I: 31.296.612
+Carlos Andrade C.I:
+José Garcia C.I: 
+
+*/
+
+
+public class Main_Menu {
     
 
     //el usuario es Admin con A mayuscula porque sino no funciona y la clave es 1234
@@ -133,14 +144,21 @@ public class Logineval2 {
                  
                 //8 REINAS
                 case 6:
-                    
                     NQueens resolve = new NQueens();//inicializamos el numero de reinas en el constructor
-                    resolve.setNqueens(8);//Numero de reinas fijo
+                    
+                    try{
+                        
+                        resolve.setNqueens(8);//Numero de reinas fijo
         
-                    resolve.process(0);//iniciamos en 0; esto significa que iniciamos en la fila 0
+                        resolve.process(0);//iniciamos en 0; esto significa que iniciamos en la fila 0
         
-                    //mostrar resultado
-                    resolve.show();
+                        //mostrar resultado
+                        resolve.show();
+                        
+                    }catch(NullPointerException e){
+                        continue;
+                    }
+                    
                      
                     break;
                  

@@ -1,4 +1,4 @@
-package copy;
+package zPruebas;
 /*
 import NewFunctions.McmandMcd2;
 import javax.swing.JOptionPane;
