@@ -54,12 +54,12 @@ public class Main_Menu {
                 
                 int opc =JOptionPane.showConfirmDialog(null,"Esta seguro de salir del programa?", "Confirmacion", JOptionPane.YES_NO_OPTION);
                 
-                    if (opc==JOptionPane.YES_OPTION){
-                        System.exit(0);
-                    }
-                    else{
-                        continue;
-                    }
+                if (opc==JOptionPane.YES_OPTION){
+                    System.exit(0);
+                }
+                else{
+                    continue;
+                }
             }
             
             int numero=Integer.parseInt(option);
@@ -164,13 +164,20 @@ public class Main_Menu {
                  
                 //SALIR
                 case 7: 
-                    System.exit(0);
+                    int opc =JOptionPane.showConfirmDialog(null,"Esta seguro de salir del programa?", "Confirmacion", JOptionPane.YES_NO_OPTION);
+                
+                    if (opc==JOptionPane.YES_OPTION){
+                        System.exit(0);
+                    }
+                    else{
+                        option = "0";
+                    }
                 break;
                  
                 default:
                     JOptionPane.showMessageDialog(null,"opcion Invalida");  
             }
-        }while(!"8".equals(option));
+        }while(!"7".equals(option));
     }   
 
     //funcion para validar sesions
